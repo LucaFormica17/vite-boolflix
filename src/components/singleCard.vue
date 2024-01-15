@@ -16,7 +16,8 @@ export default {
             US,
             FR,
             ES,
-            JP
+            JP,
+            hover: false
         }
     },
     props:{
@@ -26,13 +27,17 @@ export default {
 }
 </script>
 <template lang="">
-    
-        <div class="movie-card">
-            <h3>{{media.title}}{{media.name}}</h3>
-            <img v-if="media.original_language === 'en' ? media.original_language = 'gb' : media.original_language = media.original_language" :src="`/node_modules/country-flag-icons/1x1/${media.original_language.toUpperCase()}.svg`" :alt="media.original_language">
-            <p>{{media.original_title}}{{media.original_name}}</p>
-            <p>{{media.vote_average}}</p>
-            
+        <div class="rotate-card" @mouseover="this.hover = true" @mouseleave="this.hover = false">
+            <div class="movie-cover" :class="this.hover === true ? 'rotate' : ''">
+                <img class="cover" :src="`http://image.tmdb.org/t/p/w500${media.backdrop_path}`" :alt="media.title">
+            </div>
+
+            <div class="movie-card" :class="this.hover === true ? 'rotate' : ''">
+                <h3>{{media.title}}{{media.name}}</h3>
+                <img v-if="media.original_language === 'en' ? media.original_language = 'gb' : media.original_language = media.original_language" :src="`/node_modules/country-flag-icons/1x1/${media.original_language.toUpperCase()}.svg`" :alt="media.original_language">
+                <p>{{media.original_title}}{{media.original_name}}</p>
+                <p>{{media.vote_average}}</p>
+            </div>  
         </div>
     
 </template>
@@ -40,27 +45,61 @@ export default {
 @use './styles/generals.scss';
 @use './styles/partials/variables' as*;
 
-    .movie-card{
+    .rotate-card{
         width: calc(100% / 4 - 10px);
         margin: 10px 5px;
-        background-color: black;
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        height: 450px;
+        cursor: pointer;
+        position: relative;
 
-        h3{
-            color: $red_flix;
+        .movie-cover{
+            transform: perspective(600px) rotateY(0deg);
+            backface-visibility: hidden;
+            transition: all 0.5s linear 0s;
+
+            &.rotate{
+                transform: perspective(1600px) rotateY(-180deg);
+            }
+            .cover{
+                width: 100%;
+                height: 450px;
+                margin: 0;
+            }
+    
         }
+        .movie-card{
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: perspective(1600px) rotateY(180deg);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            backface-visibility: hidden;
+            transition: all 0.5s linear 0s;
 
-        img{
-            width: 80px;
-            height: 40px;
-            margin: 5px;
-        }
-
-        p{
-            color: white;
+            &.rotate{
+                transform: perspective(600px) rotateY(0deg);
+            }
+    
+            h3{
+                color: $red_flix;
+            }
+    
+            img{
+                width: 80px;
+                height: 40px;
+                margin: 5px;
+            }
+    
+            p{
+                color: white;
+            }
         }
     }
     
