@@ -28,9 +28,9 @@ export default {
 <template lang="">
     
         <div class="movie-card">
-            <h3>{{media.title}}</h3>
+            <h3>{{media.title}}{{media.name}}</h3>
             <img v-if="media.original_language === 'en' ? media.original_language = 'gb' : media.original_language = media.original_language" :src="`/node_modules/country-flag-icons/1x1/${media.original_language.toUpperCase()}.svg`" :alt="media.original_language">
-            <p>{{media.original_title}}</p>
+            <p>{{media.original_title}}{{media.original_name}}</p>
             <p>{{media.vote_average}}</p>
             
         </div>

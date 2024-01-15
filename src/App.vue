@@ -18,10 +18,14 @@ export default {
   
   methods: {
     filterMovies(){
-      store.moviesList = [];
 
-      axios.get(store.apiMovieUrl += store.apiKey += store.apiQuery += store.movieSearch).then((response) =>{
-      store.moviesList = response.data.results;
+      axios.get(store.apiMovieUrl + store.apiKey + store.apiQuery + store.movieSearch).then((response) =>{
+        store.moviesList = response.data.results;
+      });
+
+      axios.get(store.apiSeriesURL + store.apiKey + store.apiQuery + store.movieSearch).then((response) =>{
+        console.log(response.data);
+      store.seriesList = response.data.results;
       });
 
     }
