@@ -3,6 +3,9 @@ import { store } from '../store.js';
 
 import singleCard from './singleCard.vue';
 export default {
+    components:{
+        singleCard
+    },
     data() {
         return {
             store
@@ -16,12 +19,7 @@ export default {
             <div class="row">
                 <div class="col-12">
                     <div class="cards-container">
-                        <div class="movie-card" v-for="(movie, index) in store.moviesList" :key="index">
-                            {{movie.title}}
-                            {{movie.original_title}}
-                            {{movie.original_language}}
-                            {{movie.vote_average}}
-                        </div>
+                        <singleCard v-for="(movie, index) in store.moviesList" :key="index" :media="movie"/>
                     </div>
                 </div>
             </div>
@@ -34,11 +32,5 @@ export default {
     .cards-container{
         display: flex;
         flex-wrap: wrap;
-
-        .movie-card{
-            width: calc(100% / 4 - 10px);
-            margin: 10px 5px;
-            background-color: white;
-        }
     }
 </style>

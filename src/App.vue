@@ -15,6 +15,7 @@ export default {
       store
     }
   },
+  
   methods: {
     filterMovies(){
       store.moviesList = [];
@@ -22,6 +23,7 @@ export default {
       axios.get(store.apiMovieUrl += store.apiKey += store.apiQuery += store.movieSearch).then((response) =>{
       store.moviesList = response.data.results;
       });
+
     }
   },
 }
