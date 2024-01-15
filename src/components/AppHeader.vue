@@ -1,6 +1,12 @@
 <script>
+import { store } from '../store.js';
+
 export default {
-    
+    data() {
+        return {
+            store,
+        }
+    },
 }
 </script>
 <template lang="">
@@ -13,8 +19,8 @@ export default {
                             <h1>Boolflix</h1>
                         </div>
                         <div class="search-bar">
-                            <input type="text" class="form-control" placeholder="Film, Serie Tv...">
-                            <button class="btn btn-primary">Cerca</button>
+                            <input type="text" class="form-control" placeholder="Film, Serie Tv..." v-model="store.movieSearch">
+                            <button class="btn btn-primary" @click="$emit('filter_movies')">Cerca</button>
                         </div>
                     </div>
                 </div>
@@ -29,7 +35,7 @@ export default {
     .nav{
         display: flex;
         justify-content: space-between;
-        padding: 10px 0;
+        padding: 25px 0;
 
         .title{
 

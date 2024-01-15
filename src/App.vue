@@ -15,11 +15,20 @@ export default {
       store
     }
   },
+  methods: {
+    filterMovies(){
+      store.moviesList = [];
+
+      axios.get(store.apiMovieUrl += store.apiKey += store.apiQuery += store.movieSearch).then((response) =>{
+      store.moviesList = response.data.results;
+      });
+    }
+  },
 }
 </script>
 <template lang="">
   <div>
-    <AppHeader />
+    <AppHeader @filter_movies="filterMovies"/>
     <AppMain />
   </div>
 </template>
