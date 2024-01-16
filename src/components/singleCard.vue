@@ -36,16 +36,31 @@ export default {
                 
 
             <div class="movie-card" :class="this.hover === true ? 'rotate' : ''">
-                <h3>{{media.title}}{{media.name}}</h3>
-                <img v-if="media.original_language === 'en' ? media.original_language = 'gb' : media.original_language = media.original_language" :src="`/node_modules/country-flag-icons/1x1/${media.original_language.toUpperCase()}.svg`" :alt="media.original_language">
-                <p>{{media.original_title}}{{media.original_name}}</p>
-                <p>{{media.vote_average/2}}
-                    <i class="fa-star" :class="media.vote_average/2 >= 1 ? 'fa-solid' : 'fa-regular'"></i>
-                    <i class="fa-star" :class="media.vote_average/2 >= 2 ? 'fa-solid' : 'fa-regular'"></i>
-                    <i class="fa-star" :class="media.vote_average/2 >= 3 ? 'fa-solid' : 'fa-regular'"></i>
-                    <i class="fa-star" :class="media.vote_average/2 >= 4 ? 'fa-solid' : 'fa-regular'"></i>
-                    <i class="fa-star" :class="media.vote_average/2 == 5 ? 'fa-solid' : 'fa-regular'"></i>
-                </p>
+                <ul class="list-unstyled">
+                    <li>
+                        <h5><strong>Titolo:</strong> {{media.title}}{{media.name}}</h5>
+                    </li>
+                    <li>
+                        <p><strong>Titolo originale:</strong> {{media.original_title}}{{media.original_name}}</p>
+                    </li>
+                    <li><strong class="text-white">Paese di origine:</strong> 
+                        <img v-if="media.original_language === 'en' ? media.original_language = 'gb' : media.original_language = media.original_language" :src="`/node_modules/country-flag-icons/1x1/${media.original_language.toUpperCase()}.svg`" :alt="media.original_language">
+                    </li>
+                    <li>
+                        <p><strong>Valutazione: </strong>
+                            <i class="fa-star" :class="media.vote_average/2 >= 1 ? 'fa-solid' : 'fa-regular'"></i>
+                            <i class="fa-star" :class="media.vote_average/2 >= 2 ? 'fa-solid' : 'fa-regular'"></i>
+                            <i class="fa-star" :class="media.vote_average/2 >= 3 ? 'fa-solid' : 'fa-regular'"></i>
+                            <i class="fa-star" :class="media.vote_average/2 >= 4 ? 'fa-solid' : 'fa-regular'"></i>
+                            <i class="fa-star" :class="media.vote_average/2 == 5 ? 'fa-solid' : 'fa-regular'"></i>
+                        </p>
+                    </li>
+                    <li>
+                        <p><strong>Overview: </strong>
+                            {{media.overview}}
+                        </p>
+                    </li>
+                </ul>
             </div>  
         </div>
     
@@ -81,9 +96,6 @@ export default {
             height: 100%;
             background-color: black;
             padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             transform: perspective(1600px) rotateY(180deg);
             position: absolute;
             top: 0;
@@ -91,28 +103,35 @@ export default {
             right: 0;
             backface-visibility: hidden;
             transition: all 0.5s linear 0s;
+            overflow-y: auto;
 
             &.rotate{
                 transform: perspective(600px) rotateY(0deg);
             }
-    
-            h3{
-                color: $red_flix;
-            }
-    
-            img{
-                width: 80px;
-                height: 40px;
-                margin: 5px;
-            }
-    
-            p{
-                color: white;
 
-                i{
+            li{
+                margin: 5px auto;
+
+
+                h5{
+                    color: $red_flix;
+                }
+        
+                img{
+                    width: 80px;
+                    height: 40px;
+                    
+                }
+        
+                p{
                     color: white;
+    
+                    i{
+                        color: white;
+                    }
                 }
             }
+    
         }
     }
     
