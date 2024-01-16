@@ -23,13 +23,23 @@ export default {
     props:{
         media: Object
     },
+    created() {
+        this.fullStars();   
+    },
+    methods: {
+        fullStars(){
+            if (this.media.vote_average < 2) {
+                
+            }
+        }
+    },
     
 }
 </script>
 <template lang="">
         <div class="rotate-card" @mouseover="this.hover = true" @mouseleave="this.hover = false">
             <div class="movie-cover" :class="this.hover === true ? 'rotate' : ''">
-                <img class="cover" :src="`http://image.tmdb.org/t/p/w500${media.backdrop_path}`" :alt="media.title">
+                <img class="cover" :src="media.poster_path == null ? 'https://www.batteryworld.com.au/app/img/no_image_available.jpeg?resizeid=4&resizeh=800&resizew=800' : `http://image.tmdb.org/t/p/w500${media.poster_path}`" :alt="media.title">
             </div>
 
             <div class="movie-card" :class="this.hover === true ? 'rotate' : ''">

@@ -24,7 +24,6 @@ export default {
       });
 
       axios.get(store.apiSeriesURL + store.apiKey + store.apiQuery + store.movieSearch).then((response) =>{
-        console.log(response.data);
       store.seriesList = response.data.results;
       });
 
