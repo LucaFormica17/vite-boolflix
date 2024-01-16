@@ -17,21 +17,12 @@ export default {
             FR,
             ES,
             JP,
-            hover: false
+            hover: false,
+            stars: []
         }
     },
     props:{
         media: Object
-    },
-    created() {
-        this.fullStars();   
-    },
-    methods: {
-        fullStars(){
-            if (this.media.vote_average < 2) {
-                
-            }
-        }
     },
     
 }
@@ -42,11 +33,19 @@ export default {
                 <img class="cover" :src="media.poster_path == null ? 'https://www.batteryworld.com.au/app/img/no_image_available.jpeg?resizeid=4&resizeh=800&resizew=800' : `http://image.tmdb.org/t/p/w500${media.poster_path}`" :alt="media.title">
             </div>
 
+                
+
             <div class="movie-card" :class="this.hover === true ? 'rotate' : ''">
                 <h3>{{media.title}}{{media.name}}</h3>
                 <img v-if="media.original_language === 'en' ? media.original_language = 'gb' : media.original_language = media.original_language" :src="`/node_modules/country-flag-icons/1x1/${media.original_language.toUpperCase()}.svg`" :alt="media.original_language">
                 <p>{{media.original_title}}{{media.original_name}}</p>
-                <p>{{media.vote_average}}</p>
+                <p>{{media.vote_average/2}}
+                    <i class="fa-star" :class="media.vote_average/2 >= 1 ? 'fa-solid' : 'fa-regular'"></i>
+                    <i class="fa-star" :class="media.vote_average/2 >= 2 ? 'fa-solid' : 'fa-regular'"></i>
+                    <i class="fa-star" :class="media.vote_average/2 >= 3 ? 'fa-solid' : 'fa-regular'"></i>
+                    <i class="fa-star" :class="media.vote_average/2 >= 4 ? 'fa-solid' : 'fa-regular'"></i>
+                    <i class="fa-star" :class="media.vote_average/2 == 5 ? 'fa-solid' : 'fa-regular'"></i>
+                </p>
             </div>  
         </div>
     
@@ -109,6 +108,10 @@ export default {
     
             p{
                 color: white;
+
+                i{
+                    color: white;
+                }
             }
         }
     }
